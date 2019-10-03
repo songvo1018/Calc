@@ -33,7 +33,8 @@ function calculate() {
     })(secondCoef, colorRing);
     
     // Output
-    document.getElementById('resultSpace').innerHTML += '<br>' + '  ||  RESULT   ' + thirdCoef.toFixed(2) + ' millimetrs  ' + ' (' + colorRing + ')   ||';
+    document.getElementById('resultSpace').innerHTML += '<br>' + '  ||  RESULT   ' 
+        + thirdCoef.toFixed(2) + ' millimetrs  ' + ' (' + colorRing + ')   ||';
     console.log(thirdCoef.toFixed(2));
 };
 
