@@ -1,3 +1,4 @@
+// Calculate function
 function calculate() {
     // Input
     const sizeRing = parseFloat(document.getElementById('sizeRing').value);
@@ -37,16 +38,44 @@ function calculate() {
         }
     })(widthCoef, colorRing);
 
+    // choice color ring changed background image   
+    let colorBackground = (function (colorRing) {
+        let el = document.getElementById('main');;
+        if (colorRing === 'white') {
+            el.classList.remove('lemonBackground');
+            el.classList.remove('redBackground');
+            el.classList.add('whiteBackground');
+        } else if (colorRing === 'red') {
+            el.classList.remove('whiteBackground');
+            el.classList.remove('lemonBackground');
+            el.classList.add('redBackground');
+        } else if (colorRing === 'lemon') {
+            el.classList.remove('whiteBackground');
+            el.classList.remove('redBackground');
+            el.classList.add('lemonBackground');
+        }
+    })(colorRing);
+
+    console.log(colorBackground);
     // Output
-    document.getElementById('resultSpace').innerHTML += `${'<br></br>'}RESULT => ${colorCoef.toFixed(2)} millimetres (${colorRing}) ||`;
+    document.getElementById('resultSpace').innerHTML += `${'<br></br>'}=> ${colorCoef.toFixed(2)} millimetres (${colorRing})`;
     console.log(colorCoef.toFixed(2));
 };
-// start function
-document.getElementById('btn__ok').addEventListener('click', calculate);
+
+// Function show help text under result space
+function showHelpText() {
+    let el = document.getElementById("example");
+    el.classList.toggle('hide');
+    el.classList.toggle('example');
+};
+
+// start calculate function
 document.querySelector('.btn__ok').addEventListener('click', calculate);
 document.addEventListener('keypress', function (event) {
     if (event.keyCode === 13 || event.which === 13) {
         calculate();
     }
 });
-document.getElementById('btn__ok').addEventListener('click', calculate);
+
+// start show function
+document.getElementById('helpBtn').addEventListener('click', showHelpText);
