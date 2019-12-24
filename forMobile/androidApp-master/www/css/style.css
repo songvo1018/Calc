@@ -1,0 +1,64 @@
+* {
+	background: #5f7694;
+}
+.hide {
+	display: none;
+}
+.example {
+	display: block;
+	line-height: 28px;
+	padding: 5px;
+  padding-top: 5px;
+  color: #fff;
+}
+.help__btn{
+  display: flex;
+  justify-content: flex-end;
+}
+#helpBtn {
+	background-color: #fff;
+  opacity: 50%;
+  border: none;
+}
+input,
+select {
+	background-color: #fff;
+	width: 150px;
+	height: 30px;
+	border-radius: 5px;
+	border: 1px cyan solid;
+	margin: 15px 10px;
+	padding: 5px;
+	line-height: 18px;
+	font-size: 15px;
+	text-align: left;
+}
+select option:nth-child(1) {
+	background-color: #fff;
+}
+select option:nth-child(2) {
+	background-color: rgb(190, 148, 142);
+}
+select option:nth-child(3) {
+	background-color: rgb(190, 199, 109);
+}
+select{
+  height: 67px;
+    font-size: 30px;
+    padding: 15px;
+}
+.btn__ok {
+  margin: 0 5px 15px 150px;
+  background-color: rgba(78, 180, 78, 0.473);
+}
+.btn__del{
+  margin: 0 5px 15px 150px;
+  background-color: rgba(180, 78, 78, 0.473);
+}
+.result{
+  background-color: darkolivegreen;
+  border-radius: 5px;
+  color: #fff;
+  padding: 5px;
+  text-align: center;
+}

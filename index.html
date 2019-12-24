@@ -1,46 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Calculator blank Ring</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="main redBackground lemonBackground whiteBackground" id="main">
-        <div class="helpBtn">
-            <button type="submit" id="helpBtn">Help?</button>
-        </div>
-        <div class="head">
-            Ring size, mm <input type="text" size="1" id="sizeRing"> <br>
-            Ring thick, mm <input type="text" size="1" id="thickRing"> <br>
-            Ring width, mm <input type="text" size="1" id="widthRing"> <br>
-            <select class="text-input" id="colorRing">
-                <option value="white">white</option>
-                <option value="red">red</option>
-                <option value="lemon">lemon</option>
-            </select>
-            <input type="button" id="btn__ok" class="btn__ok" value="OK">
-            <br>
-        </div>
-        <div class="result">
-            <hr>
-            <p>Result</p>
-            <p id="resultSpace" class="resultSpace"></p>
-        </div>
-        <br>
-        <br>
-        <br>
-        <div class="hide" id="example">
-            Enter all parameters in millimeters, <br>
-            for example on picture: <span>size ring 20mm, <br>
-                thick 0.57mm, width 3mm and color white.
-            </span>
-        </div>
-    </div>
-    <script src="script.js"></script>
-</body>
-
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Calculator blank Ring</title>
+		<link rel="stylesheet" href="/css/style.css" />
+	</head>
+	<body>
+		<div class="main" id="main">
+			<div class="help__btn">
+				<button type="submit" id="helpBtn">Help?</button>
+				<div class="hide" id="example">
+					Enter all parameters in millimeters, <br />
+					for example on picture:
+					<span>size ring 20mm, thick 0.57mm, width 3mm and color white. </span>
+				</div>
+			</div>
+			<div class="calculate">
+				<div>
+					<input
+						type="text"
+						size="1"
+						id="sizeRing"
+						placeholder="Ring size, mm "
+					/>
+				</div>
+				<div>
+					<input
+						type="text"
+						size="1"
+						id="thickRing"
+						placeholder="Ring thick, mm "
+					/>
+				</div>
+				<div>
+					<input
+						type="text"
+						size="1"
+						id="widthRing"
+						placeholder="Ring width, mm "
+					/>
+				</div>
+				<div>
+					<select class="text-input" id="colorRing" onchange="checkColor()">
+						<option value="white">white</option>
+						<option value="red">red</option>
+						<option value="lemon">lemon</option>
+					</select>
+				</div>
+				<div>
+					<input type="button" id="btn__ok" class="btn__ok" value="OK" />
+                </div>
+                
+			</div>
+			<div class="res">
+				<hr />
+				<p>Result</p>
+				<p id="resultSpace" class="resultSpace"></p>
+            </div>
+            <div>
+					<input type="button" id="btn__del" class="btn__del" value="DEL" onclick="deleteResult()" />
+				</div>
+		</div>
+		<script src="/js/script.js"></script>
+    </body>
+    
 </html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Calculator blank Ring</title>
+		<link rel="stylesheet" href="/css/style.css" />
+	</head>
+	<body>
+		<div class="main" id="main">
+			<div class="help__btn">
+				<button type="submit" id="helpBtn">Help?</button>
+				<div class="hide" id="example">
+					Enter all parameters in millimeters, <br />
+					for example on picture:
+					<span>size ring 20mm, thick 0.57mm, width 3mm and color white. </span>
+				</div>
+			</div>
+			<div class="calculate">
+				<div>
+					<input
+						type="text"
+						size="1"
+						id="sizeRing"
+						placeholder="Ring size, mm "
+					/>
+				</div>
+				<div>
+					<input
+						type="text"
+						size="1"
+						id="thickRing"
+						placeholder="Ring thick, mm "
+					/>
+				</div>
+				<div>
+					<input
+						type="text"
+						size="1"
+						id="widthRing"
+						placeholder="Ring width, mm "
+					/>
+				</div>
+				<div>
+					<select class="text-input" id="colorRing" onchange="checkColor()">
+						<option value="white">white</option>
+						<option value="red">red</option>
+						<option value="lemon">lemon</option>
+					</select>
+				</div>
+				<div>
+					<input type="button" id="btn__ok" class="btn__ok" value="OK" />
+				</div>
+			</div>
+			<div class="res">
+				<hr />
+				<p>Result</p>
+				<p id="resultSpace" class="resultSpace"></p>
+			</div>
+			<div>
+				<input
+					type="button"
+					id="btn__del"
+					class="btn__del"
+					value="DEL"
+					onclick="deleteResult()"
+				/>
+			</div>
+		</div>
+		<script src="/js/script.js"></script>
+	</body>
+	<style>
+		* {
+			background: #5f7694;
+		}
+		.hide {
+			display: none;
+		}
+		.example {
+			display: block;
+			line-height: 28px;
+			padding: 5px;
+			padding-top: 5px;
+			color: #fff;
+		}
+		.help__btn {
+			display: flex;
+			justify-content: flex-end;
+		}
+		#helpBtn {
+			background-color: #fff;
+			opacity: 50%;
+			border: none;
+		}
+		input,
+		select {
+			background-color: #fff;
+			width: 150px;
+			height: 30px;
+			border-radius: 5px;
+			border: 1px cyan solid;
+			margin: 15px 10px;
+			padding: 5px;
+			line-height: 18px;
+			font-size: 15px;
+			text-align: left;
+		}
+		select option:nth-child(1) {
+			background-color: #fff;
+		}
+		select option:nth-child(2) {
+			background-color: rgb(190, 148, 142);
+		}
+		select option:nth-child(3) {
+			background-color: rgb(190, 199, 109);
+		}
+		select {
+			height: 67px;
+			font-size: 30px;
+			padding: 15px;
+		}
+		.btn__ok {
+			margin: 0 5px 15px 150px;
+			background-color: rgba(78, 180, 78, 0.473);
+		}
+		.btn__del {
+			margin: 0 5px 15px 150px;
+			background-color: rgba(180, 78, 78, 0.473);
+		}
+		.result {
+			background-color: darkolivegreen;
+			border-radius: 5px;
+			color: #fff;
+			padding: 5px;
+			text-align: center;
+		}
+	</style>
+	<script>
+		// Calculate function
+		function calculate() {
+			// Input
+			const sizeRing = parseFloat(document.getElementById("sizeRing").value);
+			const thickRing = parseFloat(document.getElementById("thickRing").value);
+			const widthRing = parseFloat(document.getElementById("widthRing").value);
+			const colorRing = document.getElementById("colorRing").value;
+
+			// Calculate
+			let sizeCoef = (function(sizeRing, thickRing) {
+				if (thickRing > 1.7) {
+					return (sizeRing + thickRing) * 3.14 - 0.4;
+				} else {
+					return (sizeRing + thickRing) * 3.14;
+				}
+			})(sizeRing, thickRing);
+
+			let widthCoef = (function(sizeCoef, widthRing) {
+				if (widthRing > 6) {
+					return sizeCoef + 0.4;
+				} else if (widthRing > 4) {
+					return sizeCoef + 0.2;
+				} else if (widthRing < 4 && widthRing > 2) {
+					return sizeCoef;
+				} else {
+					return sizeCoef - 0.3;
+				}
+			})(sizeCoef, widthRing);
+
+			let colorCoef = (function(widthCoef, colorRing) {
+				if (colorRing === "white") {
+					return widthCoef + 0.3;
+				} else if (colorRing === "red") {
+					return widthCoef;
+				} else if (colorRing === "lemon") {
+					return widthCoef - 0.25;
+				}
+			})(widthCoef, colorRing);
+			// Output
+			console.log(colorCoef.toFixed(2));
+			document.getElementById(
+				"resultSpace"
+			).innerHTML += `${'<p class="result">'}${colorCoef.toFixed(
+				2
+			)} millimetres (${colorRing})${"</p>"} `;
+		}
+		// clear result area after click "DEL"
+		function deleteResult() {
+			document.getElementById("resultSpace").innerHTML = " ";
+		}
+		// Function show help text under result space
+		function showHelpText() {
+			let el = document.getElementById("example");
+			el.classList.toggle("hide");
+			el.classList.toggle("example");
+		}
+
+		// start calculate function
+		document.querySelector(".btn__ok").addEventListener("click", calculate);
+		document.addEventListener("keypress", function(event) {
+			if (event.keyCode === 13 || event.which === 13) {
+				calculate();
+			}
+		});
+
+		// start show function
+		document.getElementById("helpBtn").addEventListener("click", showHelpText);
+	</script>
+</html>
